@@ -1,0 +1,26 @@
+
+
+POST http://localhost:8080/person/
+content-type: application/json
+X-TenantID: tenant_a
+
+{
+    "firstName": "hihi",
+    "lastName": "hehe"
+}
+
+
+###
+
+
+GET http://localhost:8080/person/1
+content-type: application/json
+X-TenantID: tenant_b
+
+
+###
+
+
+GET http://localhost:8080/person/
+content-type: application/json
+X-TenantID: tenant_b

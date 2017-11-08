@@ -19,19 +19,18 @@ public class TenantInterceptor extends HandlerInterceptorAdapter {
       throws Exception {
 
     String tenant = req.getHeader(TENANT_HEADER);
-    boolean tenantSet = false;
 
     if(StringUtils.isEmpty(tenant)) {
       res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       res.setContentType(MediaType.APPLICATION_JSON_VALUE);
       res.getWriter().write("{\"error\": \"No tenant supplied\"}");
       res.getWriter().flush();
-    } else {
-      TenantContext.setCurrentTenant(tenant);
-      tenantSet = true;
+      return false;
     }
 
-    return tenantSet;
+    TenantContext.setCurrentTenant(tenant);
+
+    return true;
   }
 
   @Override
